@@ -1,0 +1,142 @@
+# =========================
+
+# Python basics
+
+# =========================
+
+**pycache**/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+
+venv/
+.env/
+.venv/
+ENV/
+env/
+
+# =========================
+
+# Jupyter / notebooks
+
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+
+# Logs & debugging
+
+# =========================
+
+logs/
+*.log
+wandb/
+mlruns/
+
+# =========================
+
+# Hugging Face / Transformers
+
+# =========================
+
+# Cached models and datasets
+
+.cache/
+huggingface/
+hf_cache/
+
+# Transformers cache (sometimes appears locally)
+
+transformers_cache/
+
+# Tokenizers cache
+
+tokenizers/
+
+# =========================
+
+# PyTorch
+
+# =========================
+
+# Model weights & checkpoints
+
+*.pt
+*.pth
+*.bin
+checkpoints/
+models/
+weights/
+
+# Torch hub cache
+
+torch_cache/
+
+# =========================
+
+# Datasets
+
+# =========================
+
+data/
+datasets/
+*.csv
+*.tsv
+*.json
+*.jsonl
+
+# =========================
+
+# Environment & secrets
+
+# =========================
+
+.env
+*.env
+.env.*
+
+# Hugging Face tokens
+
+huggingface_token.txt
+
+# =========================
+
+# IDEs / Editors
+
+# =========================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+
+# OS files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# Build / dist
+
+# =========================
+
+build/
+dist/
+*.egg-info/
+
+# =========================
+
+# Misc
+
+# =========================
+
+*.bak
+*.tmp
