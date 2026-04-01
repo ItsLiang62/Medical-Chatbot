@@ -81,7 +81,7 @@ torch_cache/
 
 # =========================
 
-data/
+/data/
 datasets/
 *.csv
 *.tsv
