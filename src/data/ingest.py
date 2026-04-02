@@ -1,5 +1,5 @@
-import requests
-import json
+from requests import get
+from json import dump
 from lxml import etree
 from pathlib import Path
 
@@ -17,13 +17,13 @@ def search_articles(query, max_results, save_filename):
         "sort": "relevance"
     }
 
-    response = requests.get(url, params)
+    response = get(url, params)
     pmids = response.json()["esearchresult"]["idlist"]
 
     if not save_filename.endswith(".txt"):
         raise ValueError("Article PMIDs must be saved in .txt file")
 
-    file_path = data_dir / "external" / save_filename
+    file_path = data_dir / "pmids" / save_filename
     file_path.parent.mkdir(parents=True, exist_ok=True)
     open(file_path, "w").write(",".join(pmids))
 
@@ -38,7 +38,7 @@ def fetch_articles(pmids, save_filename):
         "retmode": "xml"
     }
 
-    response = requests.get(url, params)
+    response = get(url, params)
 
     if not save_filename.endswith(".xml"):
         raise ValueError("Raw article data must be saved in .xml file")
@@ -68,11 +68,11 @@ def parse_articles(xml_content, save_filename):
     if not save_filename.endswith(".json"):
         raise ValueError("Parsed article data must be saved in .json file")
 
-    file_path = data_dir / "processed" / save_filename
+    file_path = data_dir / "parsed" / save_filename
 
     file_path.parent.mkdir(parents=True, exist_ok=True)
     with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(articles, f, indent=2, ensure_ascii=False)
+        dump(articles, f, indent=2, ensure_ascii=False)
 
     return articles
 
@@ -87,6 +87,8 @@ def main(queries_max_results):
         )
 
 if __name__ == "__main__":
-    to_retrieve = {
+    to_ingest = {
+        "diabetes": 5,
+        "cancer": 5
     }
-    main(to_retrieve)
+    main(to_ingest)
