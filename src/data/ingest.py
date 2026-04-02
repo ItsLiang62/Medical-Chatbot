@@ -88,7 +88,7 @@ def main(queries_max_results):
 
 if __name__ == "__main__":
     to_ingest = {
-        "diabetes": 5,
-        "cancer": 5
+        "diabetes": 20,
+        "cancer": 20
     }
     main(to_ingest)

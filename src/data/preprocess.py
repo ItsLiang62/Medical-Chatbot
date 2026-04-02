@@ -13,13 +13,13 @@ def load_from_ingested():
     return datasets.load_dataset("json", data_files=data_files)
 
 def form_text(row):
-    title = row.get("title", "")
-    abstract = row.get("abstract", "")
+    title = row.get("title") or ""
+    abstract = row.get("abstract") or ""
     return {
         "text": title + " " + abstract
     }
 
-def form_chunks(batch, chunk_size=30, overlap=5):
+def form_chunks(batch, chunk_size=150, overlap=30):
     pmids = []
     chunks = []
 
@@ -43,6 +43,11 @@ def form_chunks(batch, chunk_size=30, overlap=5):
 
 def get_preprocessed_dataset():
     train_dataset = load_from_ingested()["train"]
-    train_dataset = train_dataset.map(form_text)
-    train_dataset = train_dataset.map(form_chunks, remove_columns=train_dataset.column_names, batched=True)
+    train_dataset = train_dataset.map(form_text, load_from_cache_file=False)
+    train_dataset = train_dataset.map(
+        form_chunks,
+        remove_columns=train_dataset.column_names,
+        batched=True,
+        load_from_cache_file=False
+    )
     return train_dataset

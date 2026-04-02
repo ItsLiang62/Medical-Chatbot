@@ -10,7 +10,7 @@ def form_embeddings(batch):
         batch_size=16,
         show_progress_bar=True,
         normalize_embeddings=True
-    )
+    ).astype("float32")
     return {
         "embeddings": embeddings
     }
@@ -20,7 +20,7 @@ def main():
     embedded_data_dir = root_dir / "data" / "embedded"
 
     train_dataset = get_preprocessed_dataset()
-    train_dataset = train_dataset.map(form_embeddings, batched=True)
+    train_dataset = train_dataset.map(form_embeddings, batched=True, load_from_cache_file=False)
 
     train_dataset.save_to_disk(embedded_data_dir)
 
