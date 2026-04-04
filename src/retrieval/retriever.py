@@ -25,7 +25,3 @@ def retrieve(query, k=5):
     scores, indices = load_index().search(query_vec, k)
 
     return [dataset[i] for i in indices[0]]
-
-results = retrieve("What is diabetes", 5)
-for result in results:
-    print(result["text"])
